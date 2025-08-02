@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamshot Studio Photography - Pricing Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .calculator-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .pricing-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .pricing-slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .pricing-slider {
+            height: 8px;
+            border-radius: 5px;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Background blobs -->
+    <div class="blob bg-blue-300 w-64 h-64 top-0 left-0"></div>
+    <div class="blob bg-purple-300 w-96 h-96 bottom-0 right-0"></div>
+    
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">
+                <span class="gradient-text">Dreamshot Studio Photography</span>
+            </h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Create your custom photography package and get an instant price estimate
+            </p>
+        </header>
+
+        <div class="calculator-container rounded-2xl p-6 md:p-8 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Left column: Options -->
+                <div class="space-y-8">
+                    <!-- Session Duration -->
+                    <div class="card-hover bg-white p-6 rounded-xl shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Session Duration
+                        </h3>
+                        <div class="mb-4">
+                            <input type="range" min="1" max="5" value="2" class="pricing-slider w-full bg-gray-200 appearance-none rounded-lg" id="sessionHours">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>1 hr</span>
+                                <span>5 hrs</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Hours:</span>
+                            <span class="font-semibold text-lg" id="sessionHoursValue">2</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-1">
+                            <span class="text-gray-600">Rate:</span>
+                            <span class="font-semibold" id="sessionRate">$150/hr</span>
+                        </div>
+                    </div>
+
+                    <!-- Photo Editing -->
+                    <div class="card-hover bg-white p-6 rounded-xl shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            Photo Editing
+                        </h3>
+                        <div class="mb-4">
+                            <input type="range" min="0" max="50" value="10" class="pricing-slider w-full bg-gray-200 appearance-none rounded-lg" id="editedPhotos">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>0</span>
+                                <span>50</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Photos:</span>
+                            <span class="font-semibold text-lg" id="editedPhotosValue">10</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-1">
+                            <span class="text-gray-600">Rate:</span>
+                            <span class="font-semibold">$50/photo</span>
+                        </div>
+                    </div>
+
+                    <!-- Album Options -->
+                    <div class="card-hover bg-white p-6 rounded-xl shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                            </svg>
+                            Album Options
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <input type="radio" id="noAlbum" name="albumType" value="none" class="h-4 w-4 text-blue-600" checked>
+                                <label for="noAlbum" class="ml-2 text-gray-700">No album</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="basicAlbum" name="albumType" value="basic" class="h-4 w-4 text-blue-600">
+                                <label for="basicAlbum" class="ml-2 text-gray-700">Basic album ($100)</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="premiumAlbum" name="albumType" value="premium" class="h-4 w-4 text-blue-600">
+                                <label for="premiumAlbum" class="ml-2 text-gray-700">Premium album ($200)</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="deluxeAlbum" name="albumType" value="deluxe" class="h-4 w-4 text-blue-600">
+                                <label for="deluxeAlbum" class="ml-2 text-gray-700">Deluxe album ($300)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right column: Summary -->
+                <div class="flex flex-col">
+                    <div class="bg-white p-6 rounded-xl shadow-sm flex-grow">
+                        <h3 class="text-xl font-semibold mb-6 text-center">Your Package Summary</h3>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between pb-2 border-b border-gray-100">
+                                <span class="text-gray-600">Photography Session</span>
+                                <span class="font-semibold" id="sessionCost">$300.00</span>
+                            </div>
+                            <div class="flex justify-between pb-2 border-b border-gray-100">
+                                <span class="text-gray-600">Photo Editing</span>
+                                <span class="font-semibold" id="editingCost">$500.00</span>
+                            </div>
+                            <div class="flex justify-between pb-2 border-b border-gray-100">
+                                <span class="text-gray-600">Album</span>
+                                <span class="font-semibold" id="albumCost">$0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center text-lg font-bold mt-6 pt-4 border-t border-gray-200">
+                            <span>Total Estimate</span>
+                            <span class="text-2xl gradient-text" id="totalCost">$800.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-xl shadow-md text-white">
+                        <h3 class="text-lg font-semibold mb-3">Ready to book your session?</h3>
+                        <p class="mb-4 text-sm opacity-90">Contact us with your package details for scheduling and availability.</p>
+                        <button id="bookNowBtn" class="w-full bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Booking Modal -->
+        <div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+                <h3 class="text-2xl font-bold mb-4">Booking Request</h3>
+                <p class="mb-6">Your custom package has been created! Fill out the form below to request this booking.</p>
+                
+                <form id="bookingForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 mb-1">Name</label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-1">Email</label>
+                        <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-1">Phone</label>
+                        <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-1">Preferred Date</label>
+                        <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    
+                    <div class="pt-4 flex space-x-3">
+                        <button type="button" id="closeModalBtn" class="flex-1 py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 py-2 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:opacity-90">
+                            Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Success Modal -->
+        <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Booking Request Sent!</h3>
+                <p class="text-gray-600 mb-6">We've received your request and will contact you shortly to confirm your booking.</p>
+                <button id="closeSuccessBtn" class="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:opacity-90">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const sessionHoursSlider = document.getElementById('sessionHours');
+            const sessionHoursValue = document.getElementById('sessionHoursValue');
+            const sessionRate = document.getElementById('sessionRate');
+            const editedPhotosSlider = document.getElementById('editedPhotos');
+            const editedPhotosValue = document.getElementById('editedPhotosValue');
+            const albumRadios = document.querySelectorAll('input[name="albumType"]');
+            
+            // Cost display elements
+            const sessionCostEl = document.getElementById('sessionCost');
+            const editingCostEl = document.getElementById('editingCost');
+            const albumCostEl = document.getElementById('albumCost');
+            const totalCostEl = document.getElementById('totalCost');
+            
+            // Modal elements
+            const bookNowBtn = document.getElementById('bookNowBtn');
+            const bookingModal = document.getElementById('bookingModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const bookingForm = document.getElementById('bookingForm');
+            const successModal = document.getElementById('successModal');
+            const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+            
+            // Initial calculation
+            calculateCosts();
+            
+            // Event listeners
+            sessionHoursSlider.addEventListener('input', function() {
+                sessionHoursValue.textContent = this.value;
+                updateSessionRate(this.value);
+                calculateCosts();
+            });
+            
+            editedPhotosSlider.addEventListener('input', function() {
+                editedPhotosValue.textContent = this.value;
+                calculateCosts();
+            });
+            
+            albumRadios.forEach(radio => {
+                radio.addEventListener('change', calculateCosts);
+            });
+            
+            // Modal functionality
+            bookNowBtn.addEventListener('click', function() {
+                bookingModal.classList.remove('hidden');
+            });
+            
+            closeModalBtn.addEventListener('click', function() {
+                bookingModal.classList.add('hidden');
+            });
+            
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                bookingModal.classList.add('hidden');
+                successModal.classList.remove('hidden');
+            });
+            
+            closeSuccessBtn.addEventListener('click', function() {
+                successModal.classList.add('hidden');
+            });
+            
+            // Functions
+            function updateSessionRate(hours) {
+                // Rate increases for longer sessions
+                const rate = hours <= 2 ? 150 : 250;
+                sessionRate.textContent = `$${rate}/hr`;
+            }
+            
+            function calculateCosts() {
+                // Session cost
+                const hours = parseInt(sessionHoursSlider.value);
+                const hourlyRate = hours <= 2 ? 150 : 250;
+                const sessionCost = hours * hourlyRate;
+                
+                // Editing cost
+                const photos = parseInt(editedPhotosSlider.value);
+                const editingCost = photos * 50;
+                
+                // Album cost
+                let albumCost = 0;
+                const selectedAlbum = document.querySelector('input[name="albumType"]:checked').value;
+                
+                switch(selectedAlbum) {
+                    case 'basic':
+                        albumCost = 100;
+                        break;
+                    case 'premium':
+                        albumCost = 200;
+                        break;
+                    case 'deluxe':
+                        albumCost = 300;
+                        break;
+                }
+                
+                // Update display
+                sessionCostEl.textContent = `$${sessionCost.toFixed(2)}`;
+                editingCostEl.textContent = `$${editingCost.toFixed(2)}`;
+                albumCostEl.textContent = `$${albumCost.toFixed(2)}`;
+                
+                const totalCost = sessionCost + editingCost + albumCost;
+                totalCostEl.textContent = `$${totalCost.toFixed(2)}`;
+            }
+        });
+    </script>
+<!-- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'968a6bd954d754e4',t:'MTc1NDEwNDYzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body> -->
+</html>
